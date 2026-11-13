@@ -1,0 +1,19 @@
+FAIL | Enable secret configurado
+FAIL | Usuario local admin con secret
+FAIL | Cifrado de contrasenas de linea habilitado
+FAIL | SSH version 2
+FAIL | VTY limita transporte a SSH
+FAIL | AAA permite respaldo local para VTY
+FAIL | VTY aplica lista AAA
+PASS | Servicio HTTP deshabilitado
+PASS | Servicio HTTPS deshabilitado
+FAIL | Registro de accesos fallidos habilitado
+FAIL | Registro de accesos exitosos habilitado
+FAIL | Buffer de syslog configurado
+FAIL | Comunidad SNMP de solo lectura
+FAIL | Servidor RADIUS NPS definido
+FAIL | Autenticacion OSPF con digest
+FAIL | Clave OSPF aplicada a interfaz
+FAIL | Sin source routing
+FAIL | Lista de acceso de gestion en VTY
+Resultado: 2/18 controles presentes

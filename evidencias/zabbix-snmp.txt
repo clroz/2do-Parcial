@@ -1,0 +1,4 @@
+Zabbix API: host R1-CISCO, SNMP interface 192.168.45.1, available=1.
+Zabbix API: host SW1, SNMP interface 192.168.45.2, available=1.
+Latest data: System description y System name recogidos para ambos dispositivos.
+Zabbix eth0: 192.168.45.50/24 dynamic; default route 192.168.45.1.

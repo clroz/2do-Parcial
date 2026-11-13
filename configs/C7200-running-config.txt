@@ -1,0 +1,252 @@
+! C7200 running-config snapshot; secret values redacted for publication.
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec localtime
+service password-encryption
+!
+hostname R1-CISCO
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging buffered 16384 informational
+enable secret 5 <REDACTED>
+!
+aaa new-model
+!
+!
+aaa group server radius NPS-GROUP
+ server name NPS45
+!
+aaa authentication login VTY group NPS-GROUP local
+aaa authorization exec VTY local if-authenticated 
+aaa accounting exec default start-stop group NPS-GROUP
+!
+!
+!
+!
+!
+aaa session-id common
+clock timezone AST -4 0
+no ip source-route
+!
+!
+!
+ip dhcp excluded-address 192.168.45.1 192.168.45.49
+!
+ip dhcp pool LAN45
+ network 192.168.45.0 255.255.255.0
+ default-router 192.168.45.1 
+ dns-server 192.168.45.10 
+ domain-name campusano.local
+!
+!
+!
+no ip domain lookup
+ip domain name campusano.local
+ip cef
+login on-failure log
+login on-success log
+no ipv6 cef
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+username admin privilege 15 secret 5 <REDACTED>
+!
+!
+!
+!
+!
+ip ssh time-out 60
+ip ssh version 2
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ description TRANSITO_OSPF_FORTIGATE
+ ip address 10.45.0.1 255.255.255.252
+ ip ospf message-digest-key 1 md5 <REDACTED> 080E7F7E2F4D5024170819162F002131
+ ip ospf network point-to-point
+ duplex full
+!
+interface FastEthernet1/0
+ no ip address
+ shutdown
+ duplex full
+!
+interface Ethernet2/0
+ description LAN_192.168.45.0_24
+ ip address 192.168.45.1 255.255.255.0
+ duplex full
+!
+interface Ethernet2/1
+ no ip address
+ shutdown
+ duplex full
+!
+interface Ethernet2/2
+ no ip address
+ shutdown
+ duplex full
+!
+interface Ethernet2/3
+ no ip address
+ shutdown
+ duplex full
+!
+interface Ethernet3/0
+ no ip address
+ shutdown
+ duplex full
+!
+interface Ethernet3/1
+ no ip address
+ shutdown
+ duplex full
+!
+interface Ethernet3/2
+ no ip address
+ shutdown
+ duplex full
+!
+interface Ethernet3/3
+ no ip address
+ shutdown
+ duplex full
+!
+interface Ethernet3/4
+ no ip address
+ shutdown
+ duplex full
+!
+interface Ethernet3/5
+ no ip address
+ shutdown
+ duplex full
+!
+interface Ethernet3/6
+ no ip address
+ shutdown
+ duplex full
+!
+interface Ethernet3/7
+ no ip address
+ shutdown
+ duplex full
+!
+interface Serial4/0
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial4/1
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial4/2
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial4/3
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/0
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/1
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/2
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/3
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/4
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/5
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/6
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/7
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+router ospf 45
+ router-id 192.168.45.1
+ area 0 authentication message-digest
+ passive-interface default
+ no passive-interface FastEthernet0/0
+ network 10.45.0.0 0.0.0.3 area 0
+ network 192.168.45.0 0.0.0.255 area 0
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
+access-list 10 permit 192.168.45.0 0.0.0.255
+access-list 11 permit 192.168.45.0 0.0.0.255
+!
+snmp-server community <REDACTED> RO 11
+!
+radius-server retransmit 1
+radius-server timeout 2
+!
+radius server NPS45
+ address ipv4 192.168.45.10 auth-port 1812 acct-port 1813
+ key 7 <REDACTED>
+!
+!
+control-plane
+!
+!
+line con 0
+ stopbits 1
+line aux 0
+ stopbits 1
+line vty 0 4
+ access-class 10 in
+ exec-timeout 5 0
+ login authentication VTY
+ transport input ssh
+!
+!
+end

@@ -1,0 +1,7 @@
+C7200 -> vecino OSPF 10.45.0.2: FULL
+C7200 -> ruta OSPF 172.16.45.1/32 via 10.45.0.2
+FortiGate -> vecino OSPF 192.168.45.1: Full
+FortiGate -> ruta OSPF 192.168.45.0/24 via 10.45.0.1
+SW1 -> 192.168.45.1: 3/3
+SW1 -> 192.168.45.10: 3/3
+SW1 -> 192.168.45.50: 3/3
